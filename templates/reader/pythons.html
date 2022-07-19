@@ -1,0 +1,24 @@
+{% extends 'reader/base_reader.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container mx-auto mt-4">
+    <div class="row justify-content-center">
+{% for book in books %}
+<div class="card">
+  <div class="card-img">
+        <a href="{% url 'reader:detail' book.id %}">
+      <img class="card-img" src="{{ book.cover.url }}" alt="{{ book.cover }}" style="width:150px;height:200px;"/></a>
+  </div>
+      <div class="card-content">
+     <h4 class="fa fa-star checked" style="color:orange">{{ book.rating }}</h4>
+          <p>{{ book.created_at}}</p>
+      </div>
+</div>
+{% endfor %}
+{% endblock %}
+    </div>
+    </div>
+
+

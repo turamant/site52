@@ -1,0 +1,19 @@
+{% extends 'reader/base_reader.html' %}
+
+
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+          <h2>{% block title %} Редактировать информацию о книге {% endblock %}</h2>
+          <p class="text-secondary">Добавьте обложку и иллюстрации</p>
+        </div>
+      </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Редактировать"/>
+        </form>
+    </div>
+{% endblock content %}

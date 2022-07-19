@@ -1,0 +1,21 @@
+{% extends 'reader/base_reader.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container mx-auto mt-4">
+    <div class="row justify-content-center">
+<h1>Удалить книгу</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card-img">
+      <img class="card-img" src="{{ book.cover.url }}" alt="{{ book.cover }}" style="width:100px;height:100px;"/>
+<h2>Вы увурены , что хотите удалить книгу "{{ book.title }}"</h2>
+<input type="submit" value="Удалить" />
+        <a href="{{ book.get_absolute_url }}">
+    <input type="button" value="Cancel">
+</a>
+</form>
+    </div>
+  </div>
+{% endblock content %}
