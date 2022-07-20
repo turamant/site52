@@ -1,0 +1,51 @@
+{% extends "courses/base_courses.html" %}
+
+{% block title %}My courses{% endblock %}
+
+{% block content %}
+<section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>Поиск по <span>курсам</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form id='searchForm' class="form" action="{% url 'courses:course_list' %}" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Поиск по курсам </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                            placeholder="Поиск по названию/описанию курса" value="{{ search_query }}" />
+                    </div>
+
+                    <input class="btn btn--sub btn--lg" type="submit" value="Найти" />
+                </form>
+            </div>
+        </div>
+    </section>
+<div class="container mx-auto mt-4">
+    <div class="row justify-content-center">
+<h1>My courses</h1>
+   <div class="text-center d-flex">
+      <button type="button" class="btn btn-info btn-sm mr-4">
+          <a href="{% url 'courses:course_create' %}" style="color:red; text-decoration:none"><i class="fas fa-pen"></i>Создать новый курс</a>
+      </button>
+        {% for course in object_list %}
+            <div class="card">
+                <h3>{{ course.title }}</h3>
+                <div class="card-content">
+                <button><a href="{% url 'courses:course_update' course.id %}">Edit</a></button>
+                <a href="{% url 'courses:course_delete' course.id %}">Delete</a>
+                <a href="{% url 'courses:course_module_update' course.id %}">Edit modules</a>
+                {% if course.modules.count > 0 %}
+                    <a href="{% url 'courses:module_content_list' course.modules.first.id %}">Manage contents</a>
+                {% endif %}
+                </div>
+            </div>
+{% empty %}
+<p>Вы еще не создали ни одного курса.</p>
+{% endfor %}
+
+</div>
+</div>
+
+{% endblock %}
