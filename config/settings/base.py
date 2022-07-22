@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os.path
 
 from pathlib import Path
+
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,10 +33,8 @@ if os.path.exists(dotenv_path):
 #SECRET_KEY = os.environ.get("SECRET_KEY")
 SECRET_KEY = 'django-insecure-#lgguck8!4&tn43u=r+whso^(zznaeqq93$zgnrr_(4estsbq@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -49,7 +50,11 @@ INSTALLED_APPS = [
     'projects',
     'core_apps.catalog',
     'core_apps.reader',
-    'core_apps.courses'
+    'core_apps.courses',
+    'core_apps.students',
+
+    #3rd party
+    'embed_video', #view video
 
 ]
 
@@ -63,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+
 
 TEMPLATES = [
     {
@@ -82,17 +87,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -135,14 +129,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = reverse_lazy('students:student_course_list')
+
+LOGOUT_REDIRECT_URL = reverse_lazy('courses:course_list')
 
 
 PRIVATE_STORAGE_ROOT = os.path.join(BASE_DIR, "private")

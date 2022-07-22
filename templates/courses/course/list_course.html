@@ -11,22 +11,22 @@ All courses
 {% block content %}
 <h1>
 {% if subject %}
-{{ subject.title }} courses
+{{ subject.title }} курсы
 {% else %}
-All courses
+Все курсы
 {% endif %}
 </h1>
 <div class="contents">
-<h3>Subjects</h3>
+<h3>Предметы</h3>
 <ul id="modules">
 <li {% if not subject %} class="selected"{% endif %}>
-<a href="{% url 'courses:course_list' %}">All</a>
+<a href="{% url 'courses:course_list' %}">Все</a>
 </li>
 {% for s in subjects %}
 <li {% if subject == s %} class="selected" {% endif %}>
 <a href="{% url 'courses:course_list_subject' s.slug %}">
 {{ s.title }}
-    <br><span>{{ s.total_courses }} courses</span>
+    <br><span>{{ s.total_courses }} курсов</span>
 </a>
 </li>
 {% endfor %}
@@ -40,8 +40,8 @@ All courses
 <p>
 <a href="{% url 'courses:course_list_subject' subject.slug %}">
 {{ subject }}</a>.
-{{ course.total_modules }} modules.
-Instructor: {{ course.owner.get_full_name }}
+{{ course.total_modules }} модуля.
+<i><b>Преподаватель:</b></i>{{ course.owner.get_full_name }}
 </p>
 {% endwith %}
 {% endfor %}

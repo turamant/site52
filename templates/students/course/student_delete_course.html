@@ -1,0 +1,15 @@
+{% extends "courses/base_courses.html" %}
+
+{% block title %}Удалить курс у студента{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<form action="." method="post">
+{{ enroll_form }}
+{% csrf_token %}
+<input type="submit" class="button" value="Отписаться от курса">
+</form>
+
+{% endif %}
+
+{% endblock %}

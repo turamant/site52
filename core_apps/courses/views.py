@@ -11,6 +11,7 @@ from django.views.generic.base import TemplateResponseMixin, View
 from django.apps import apps
 from core_apps.courses.forms import ModuleFormSet
 from core_apps.courses.models import Course, Subject, Module, Content
+from core_apps.students.forms import CourseEnrollForm
 
 
 class OwnerMixin:
@@ -61,6 +62,13 @@ class CourseListView(TemplateResponseMixin, View):
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail_course.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context['enroll_form'] = CourseEnrollForm(
+            initial={'course': self.object}
+        )
+        return context
 
 
 class CourseCreateView(PermissionRequiredMixin, OwnerCourseEditMixin, CreateView):
