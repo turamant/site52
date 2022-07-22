@@ -52,11 +52,15 @@ INSTALLED_APPS = [
     'core_apps.reader',
     'core_apps.courses',
     'core_apps.students',
+    'core_apps.parser',
+    'core_apps.blog',
 
     #3rd party
     'embed_video', #view video
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -14,6 +14,8 @@ urlpatterns = [
     path('reader/', include('core_apps.reader.urls', namespace='reader')),
     path('courses/', include('core_apps.courses.urls', namespace='courses')),
     path('students/', include('core_apps.students.urls', namespace='students')),
+    path('parser/', include('core_apps.parser.urls', namespace='parser')),
+    path('blog/', include('core_apps.blog.urls', namespace='blog')),
     path('', include('projects.urls', namespace='projects')),
 ]
 

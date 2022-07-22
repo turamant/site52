@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+<h2 class="center">Выберите криптовалюту</h2>
+    <form method="POST" class="post-form" action="" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <p><button type="submit" class="btn btn-success btn btn-block">получить котировки криптовалют</button></p>
+    </form>
+<p><a href="{% url 'home' %}" class="btn btn-warning btn btn-block">на главную страницу</a></p>
+
+{% endblock %}

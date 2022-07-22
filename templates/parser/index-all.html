@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+<h2 class="center">Котировки всех криптовалют</h2>
+<p><p>{{ currenttime }}</p></p>
+<table class="table table-bordered border-primary">
+    <tr>
+        <td>Валюта</td>
+        <td>Доллар</td>
+         <td>Евро</td>
+         <td>Фунт</td>
+    </tr>
+    {% for key, values in data.items %}
+    <tr>
+        <td>{{ key }}</td>
+        {% for i, v in values.items %}
+        <td>{{ v }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url 'export_to_csv' %}" class="btn btn-success btn btn-block">экспортировать в CSV файл</a></p>
+<p><a href="{% url 'export_to_xlsx' %}" class="btn btn-success btn btn-block">экспортировать в XLSX файл</a></p>
+<p><a href="{% url 'export_to_pdf' %}" class="btn btn-success btn btn-block">экспортировать в PDF файл</a></p>
+<p><a href="{% url 'home' %}" class="btn btn-warning btn btn-block">главная страница</a></p>
+{% endblock %}
